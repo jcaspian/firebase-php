@@ -86,12 +86,12 @@ class BatchApiClient
         $serializedRequest = $this->serializeSubRequest($request);
 
         $part = "--".self::PART_BOUNDARY."\r\n";
-        part .= "Content-Length: ".strlen($serializedRequest)."\r\n";
-        part .= "Content-Type: application/http\r\n";
-        part .= "content-id: ".($i + 1)."\r\n";
-        part .= "content-transfer-encoding: binary\r\n";
-        part .= "\r\n";
-        part .= $serializedRequest . "\r\n";
+        $part .= "Content-Length: ".strlen($serializedRequest)."\r\n";
+        $part .= "Content-Type: application/http\r\n";
+        $part .= "content-id: ".($i + 1)."\r\n";
+        $part .= "content-transfer-encoding: binary\r\n";
+        $part .= "\r\n";
+        $part .= $serializedRequest . "\r\n";
 
         return part;
     }
