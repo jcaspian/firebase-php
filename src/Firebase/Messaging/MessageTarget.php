@@ -23,7 +23,7 @@ final class MessageTarget
     private $type;
 
     /**
-     * @var string
+     * @var string|array
      */
     private $value;
 
@@ -35,13 +35,13 @@ final class MessageTarget
      * Create a new message target with the given type and value.
      *
      * @param string $type
-     * @param string $value
+     * @param string|array $value
      *
      * @throws InvalidArgumentException
      *
      * @return MessageTarget
      */
-    public static function with(string $type, string $value): self
+    public static function with(string $type, $value): self
     {
         $targetType = strtolower($type);
 
@@ -59,7 +59,7 @@ final class MessageTarget
                 $new->value = (string) Topic::fromValue($value);
                 break;
             case self::TOKENS:
-                $new->value = (string) TOKENS::fromValue($value);
+                $new->value = (array) Tokens::fromArray($value);
                 break;
             default:
                 throw new InvalidArgumentException('Invalid target type "'.$type.'", valid type: "'.implode(', ', self::TYPES));
@@ -73,7 +73,7 @@ final class MessageTarget
         return $this->type;
     }
 
-    public function value(): string
+    public function value()
     {
         return $this->value;
     }
