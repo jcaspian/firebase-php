@@ -43,7 +43,7 @@ class CloudMessage implements Message
     }
 
     /**
-     * @param string $type One of "condition", "token", "topic"
+     * @param string $type One of "condition", "token", "topic", "tokens"
      * @param string $value
      *
      * @throws InvalidArgumentException if the target type or value is invalid
@@ -63,6 +63,8 @@ class CloudMessage implements Message
             $targetType = MessageTarget::TOKEN;
         } elseif ($targetValue = $data[MessageTarget::TOPIC] ?? null) {
             $targetType = MessageTarget::TOPIC;
+        } elseif ($targetValue = $data[MessageTarget::TOKENS] ?? null) {
+            $targetType = MessageTarget::TOKENS;
         } else {
             throw new InvalidArgumentException('Missing target field');
         }
@@ -93,7 +95,7 @@ class CloudMessage implements Message
     }
 
     /**
-     * @param string $type One of "condition", "token", "topic"
+     * @param string $type One of "condition", "token", "topic", "tokens"
      * @param string $value
      *
      * @throws InvalidArgumentException if the target type or value is invalid

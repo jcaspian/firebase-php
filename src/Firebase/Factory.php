@@ -276,8 +276,15 @@ class Factory
                 ],
             ])
         );
+        
+        $batchApiClient = new Messaging\BatchApiClient(
+            $this->createApiClient([
+                'base_uri' => 'https://fcm.googleapis.com/batch',
+                'messaging_uri' => uri_for('https://fcm.googleapis.com/v1/projects/'.$projectId),
+            ])
+        );
 
-        return new Messaging($messagingApiClient, $topicManagementApiClient);
+        return new Messaging($messagingApiClient, $topicManagementApiClient, $batchApiClient);
     }
 
     public function createApiClient(array $config = null, array $additionalScopes = null): Client
